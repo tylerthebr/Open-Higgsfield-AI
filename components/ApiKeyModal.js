@@ -5,6 +5,8 @@ import { useState } from 'react';
 export default function ApiKeyModal({ onSave }) {
   const [key, setKey] = useState('');
   const [error, setError] = useState('');
+  // show the key while typing so you can verify it pasted correctly
+  const [showKey, setShowKey] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,10 +21,7 @@ export default function ApiKeyModal({ onSave }) {
         <div className="flex flex-col items-center text-center mb-10">
           <div className="w-14 h-14 bg-[#d9ff00]/5 rounded-2xl flex items-center justify-center border border-[#d9ff00]/10 mb-6 group hover:border-[#d9ff00]/30 transition-colors">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d9ff00" strokeWidth="1.5" className="group-hover:scale-110 transition-transform">
-              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L12 17.25l-4.5-4.5L15.5 7.5z" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <h1 className="text-xl font-bold text-white tracking-tight mb-2">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L12 17.25l-415.5 7.5z" strokeLinecap="round" strokeLinejoin=" text-white tracking-tight mb>
             Open Higgsfield AI
           </h1>
           <p className="text-white/40 text-[13px] leading-relaxed px-4">
@@ -35,14 +34,23 @@ export default function ApiKeyModal({ onSave }) {
             <label className="block text-xs font-bold text-white/30 ml-1">
               API Access Key
             </label>
-            <input
-              type="password"
-              value={key}
-              onChange={(e) => { setKey(e.target.value); setError(''); }}
-              placeholder="Paste your key here..."
-              className="w-full bg-white/5 border border-white/[0.03] rounded-md px-5 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-1 focus:ring-[#d9ff00]/30 focus:bg-white/[0.07] transition-all"
-              suppressHydrationWarning
-            />
+            <div className="relative">
+              <input
+                type={showKey ? 'text' : 'password'}
+                value={key}
+                onChange={(e) => { setKey(e.target.value); setError(''); }}
+                placeholder="Paste your key here..."
+                className="w-full bg-white/5 border border-white/[0.03] rounded-md px-5 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-1 focus:ring-[#d9ff00]/30 focus:bg-white/[0.07] transition-all pr-12"
+                suppressHydrationWarning
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors text-[11px] font-medium"
+              >
+                {showKey ? 'hide' : 'show'}
+              </button>
+            </div>
             {error && <p className="mt-2 text-red-500/80 text-[11px] font-medium ml-1">{error}</p>}
           </div>
 
@@ -56,12 +64,4 @@ export default function ApiKeyModal({ onSave }) {
 
           <p className="text-center text-[12px] text-white/20 pt-2">
             Need a key?{' '}
-            <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#d9ff00] transition-colors font-medium">
-              Get one free →
-            </a>
-          </p>
-        </form>
-      </div>
-    </div>
-  );
-}
+            <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer"
