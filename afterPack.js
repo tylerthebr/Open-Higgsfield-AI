@@ -1,6 +1,8 @@
 import { execSync } from 'child_process';
 import path from 'path';
 
+// Note: this ad-hoc signing is needed for local builds on macOS to avoid
+// "app is damaged" errors when running without a paid Apple Developer cert
 export default async function afterPack({ appOutDir, packager }) {
     if (packager.platform.name !== 'mac') return;
 
