@@ -29,11 +29,14 @@ body {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
+  /* bumped transition so hover effects feel a bit smoother */
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+/* slightly brighter thumb so it's easier to see on dark backgrounds */
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 2px; }
 
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(12px); }
