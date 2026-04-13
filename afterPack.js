@@ -17,6 +17,8 @@ export default async function afterPack({ appOutDir, packager }) {
         execSync(`codesign --deep --force --verbose --sign - "${appPath}"`, { stdio: 'inherit' });
         console.log(`  • ad-hoc signing complete`);
     } catch (err) {
-        console.warn(`  • ad-hoc signing failed (non-fatal): ${err.message}`);
+        // Changed from warn to error so it's more visible in CI logs,
+        // even though it's still non-fatal for local dev builds
+        console.error(`  • ad-hoc signing failed (non-fatal): ${err.message}`);
     }
 }
