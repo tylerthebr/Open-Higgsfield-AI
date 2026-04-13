@@ -13,6 +13,14 @@ export default async function afterPack({ appOutDir, packager }) {
     const appPath = path.join(appOutDir, `${packager.appInfo.productName}.app`);
     console.log(`  • ad-hoc signing  path=${appPath}`);
 
+    // Personal note: clear xattr before signing to avoid 'resource fork' errors on Apple Silicon
+    // this was tripping me up constantly so just doing it preemptively now
+    try {
+        execSync(`xattr -cr "${appPath}"`, { stdio: 'inherit' });
+    } catch (_) {
+        // non-fatal, ignore if xattr isn't available or fails
+    }
+
     try {
         execSync(`codesign --deep --force --verbose --sign - "${appPath}"`, { stdio: 'inherit' });
         console.log(`  • ad-hoc signing complete`);
