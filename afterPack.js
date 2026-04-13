@@ -16,6 +16,8 @@ export default async function afterPack({ appOutDir, packager }) {
     try {
         execSync(`codesign --deep --force --verbose --sign - "${appPath}"`, { stdio: 'inherit' });
         console.log(`  • ad-hoc signing complete`);
+        // Personal note: also log the app path on success so it's easy to find in terminal output
+        console.log(`  • signed app located at: ${appPath}`);
     } catch (err) {
         // Changed from warn to error so it's more visible in CI logs,
         // even though it's still non-fatal for local dev builds
