@@ -4,6 +4,9 @@ import path from 'path';
 // Note: this ad-hoc signing is needed for local builds on macOS to avoid
 // "app is damaged" errors when running without a paid Apple Developer cert
 // See: https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution
+
+// Personal note: added --verbose flag to get more details when signing fails,
+// helpful for debugging on my M2 Mac
 export default async function afterPack({ appOutDir, packager }) {
     if (packager.platform.name !== 'mac') return;
 
@@ -11,7 +14,7 @@ export default async function afterPack({ appOutDir, packager }) {
     console.log(`  • ad-hoc signing  path=${appPath}`);
 
     try {
-        execSync(`codesign --deep --force --sign - "${appPath}"`, { stdio: 'inherit' });
+        execSync(`codesign --deep --force --verbose --sign - "${appPath}"`, { stdio: 'inherit' });
         console.log(`  • ad-hoc signing complete`);
     } catch (err) {
         console.warn(`  • ad-hoc signing failed (non-fatal): ${err.message}`);
