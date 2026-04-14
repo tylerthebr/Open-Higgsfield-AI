@@ -76,6 +76,8 @@ export default function VideoGenerator({ apiKey, onVideoGenerated }) {
           onChange={(e) => setPrompt(e.target.value)}
           disabled={isGenerating}
         />
+        {/* show character count - helpful to stay concise with prompts */}
+        <span className="text-xs text-gray-500 text-right">{prompt.length} chars</span>
       </div>
 
       {/* Negative prompt input */}
