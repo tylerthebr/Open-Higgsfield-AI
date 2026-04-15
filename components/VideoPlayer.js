@@ -88,11 +88,13 @@ export default function VideoPlayer({ videoUrl, isLoading, jobId }) {
       <video
         ref={videoRef}
         src={videoUrl}
-        className="w-full max-h-96 object-contain"
+        // loop by default so I don't have to keep replaying manually
+        loop
         onTimeUpdate={handleTimeUpdate}
+        onError={() => setError(true)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onError={() => setError(true)}
+        className="w-full"
       />
     </div>
   );
