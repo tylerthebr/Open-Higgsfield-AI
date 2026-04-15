@@ -74,4 +74,6 @@ body {
 /* smooth scrolling - small thing but makes the whole app feel more polished */
 html {
   scroll-behavior: smooth;
+  /* bumped base font size slightly - default 16px feels a bit small on my monitor */
+  font-size: 17px;
 }
