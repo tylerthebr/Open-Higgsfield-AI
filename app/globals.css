@@ -75,5 +75,6 @@ body {
 html {
   scroll-behavior: smooth;
   /* bumped base font size slightly - default 16px feels a bit small on my monitor */
-  font-size: 17px;
+  /* actually 17px was making some layouts feel off, dropping back to 16px */
+  font-size: 16px;
 }
