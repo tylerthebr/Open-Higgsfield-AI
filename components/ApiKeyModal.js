@@ -6,8 +6,8 @@ export default function ApiKeyModal({ onSave }) {
   const [key, setKey] = useState('');
   const [error, setError] = useState('');
   // show the key while typing so you can verify it pasted correctly
-  // defaulting to true since I always want to see what I pasted
-  const [showKey, setShowKey] = useState(true);
+  // defaulting to false for better security - can toggle if needed
+  const [showKey, setShowKey] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +38,9 @@ export default function ApiKeyModal({ onSave }) {
               <input
                 type={showKey ? 'text' : 'password'}
                 value={key}
-                onChange={(e) => { setKey(e.target.value); setError(''); }}
+                onChange={(e) =>.value); setError(''); }}
                 placeholder="Paste your key here..."
-                className="w-full bg-white/5 border border-white/[0.03] rounded-md px-5 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-1 focus:ring-[#d9ff00]/30 focus:bg-white/[0.07] transition-all pr-12"
+                className="w-full bg-white/5 border border-white/[0.03] rounded-md px--sm text-white placeholder:text-white/10 focus:outline-none focus:ring-1 focus:ring-[#d9ff00]/30 focus:bg-white/[0.07] transition-all pr-12"
                 suppressHydrationWarning
               />
               <button
