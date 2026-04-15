@@ -6,7 +6,8 @@ export default function ApiKeyModal({ onSave }) {
   const [key, setKey] = useState('');
   const [error, setError] = useState('');
   // show the key while typing so you can verify it pasted correctly
-  const [showKey, setShowKey] = useState(false);
+  // defaulting to true since I always want to see what I pasted
+  const [showKey, setShowKey] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,11 +22,10 @@ export default function ApiKeyModal({ onSave }) {
         <div className="flex flex-col items-center text-center mb-10">
           <div className="w-14 h-14 bg-[#d9ff00]/5 rounded-2xl flex items-center justify-center border border-[#d9ff00]/10 mb-6 group hover:border-[#d9ff00]/30 transition-colors">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d9ff00" strokeWidth="1.5" className="group-hover:scale-110 transition-transform">
-              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L12 17.25l-415.5 7.5z" strokeLinecap="round" strokeLinejoin=" text-white tracking-tight mb>
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L12 17.25l-415.5 7.5" text-white tracking-tight mb>
             Open Higgsfield AI
           </h1>
-          <p className="text-white/40 text-[13px] leading-relaxed px-4">
-            Enter your <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer" className="text-[#d9ff00] hover:text-[#e5ff33] transition-colors">Muapi.ai</a> API key to start creating
+          <p className="text-white/40 text-[13ai/access-keys" target="_blank" rel="noreferrer" className="text-[#d9ff00] hover:text-[#e5ff33] transition-colors">Muapi.ai</a> API key to start creating
           </p>
         </div>
 
@@ -56,12 +56,4 @@ export default function ApiKeyModal({ onSave }) {
 
           <button
             type="submit"
-            className="w-full bg-[#d9ff00] text-black font-medium py-2.5 rounded-md hover:bg-[#e5ff33] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-[#d9ff00]/5"
-            suppressHydrationWarning
-          >
-            Get Started
-          </button>
-
-          <p className="text-center text-[12px] text-white/20 pt-2">
-            Need a key?{' '}
-            <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer"
+    
