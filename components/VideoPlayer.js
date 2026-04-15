@@ -88,13 +88,13 @@ export default function VideoPlayer({ videoUrl, isLoading, jobId }) {
       <video
         ref={videoRef}
         src={videoUrl}
-        // loop by default so I don't have to keep replaying manually
+        className="w-full"
+        // loop by default so short clips don't just stop awkwardly
         loop
         onTimeUpdate={handleTimeUpdate}
         onError={() => setError(true)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        className="w-full"
       />
     </div>
   );
