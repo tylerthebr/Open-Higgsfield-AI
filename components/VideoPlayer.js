@@ -40,8 +40,11 @@ export default function VideoPlayer({ videoUrl, isLoading, jobId }) {
     if (!videoUrl) return;
     const link = document.createElement('a');
     link.href = videoUrl;
+    // use timestamp in filename so multiple downloads don't overwrite each other
     link.download = `higgsfield-${jobId || Date.now()}.mp4`;
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   if (isLoading) {
@@ -90,46 +93,7 @@ export default function VideoPlayer({ videoUrl, isLoading, jobId }) {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         onError={() => setError(true)}
-        loop
       />
-
-      {/* Progress bar */}
-      <div className="w-full h-1 bg-gray-700">
-        <div
-          className="h-full bg-purple-500 transition-all duration-100"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
-      {/* Controls */}
-      <div className="flex items-center justify-between px-4 py-3">
-        <button
-          onClick={handlePlayPause}
-          className="flex items-center gap-2 text-white text-sm hover:text-purple-400 transition-colors"
-        >
-          {isPlaying ? (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7L8 5z" />
-            </svg>
-          )}
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-
-        <button
-          onClick={handleDownload}
-          className="flex items-center gap-2 text-gray-400 text-sm hover:text-white transition-colors"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-          Download
-        </button>
-      </div>
     </div>
   );
 }
