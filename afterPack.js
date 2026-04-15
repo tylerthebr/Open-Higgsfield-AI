@@ -31,6 +31,9 @@ export default async function afterPack({ appOutDir, packager }) {
         // even though it's still non-fatal for local dev builds
         console.error(`  • ad-hoc signing failed (non-fatal): ${err.message}`);
         // Personal note: print a reminder about the common fix on Apple Silicon
-        console.error(`  • tip: if you see 'resource fork' errors, try running: xattr -cr "${appPath}"`);
+        console.error(`  • tip: if you see 'resource fork' errors,${appPath}"`);
+        // Personal note: also remind myself to check SIP status if signing keeps failing
+        // run 'csrutil status' in Terminal to verify System Integrity Protection is enabled
+        console.error(`  • tip: run 'csrutil status' to check SIP if issues persist`);
     }
 }
