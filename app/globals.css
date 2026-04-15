@@ -70,3 +70,8 @@ body {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
+/* smooth scrolling - small thing but makes the whole app feel more polished */
+html {
+  scroll-behavior: smooth;
+}
